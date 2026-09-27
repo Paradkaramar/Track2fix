@@ -43,7 +43,11 @@ def process_payment(req: PaymentRequest, http_request: Request):
     logger.info("payment.started request_id=%s order_id=%s amount=%s currency=%s",
                 request_id, req.order_id, req.amount, req.currency)
 
-    amount_usd = convert_currency(req.amount, req.currency, cfg)
+    try:
+        amount_usd = convert_currency(req.amount, req.currency, cfg)
+    except ValueError as exc:
+        logger.error("payment.config_error request_id=%s error=%s", request_id, str(exc))
+        return JSONResponse(status_code=422, content={"detail": str(exc)})
 
     payment_id = f"PAY-{uuid.uuid4().hex[:6].upper()}"
     logger.info("payment.completed request_id=%s payment_id=%s amount_usd=%s",
