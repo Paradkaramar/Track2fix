@@ -1,0 +1,17 @@
+from app.config import Config
+
+BASE_CURRENCY = "USD"
+
+
+def convert_currency(amount: float, currency: str, config: Config) -> float:
+    """Return *amount* converted to USD.
+
+    For USD payments no conversion is needed.
+    For other currencies the configured exchange rate is applied.
+    """
+    if currency == BASE_CURRENCY:
+        return amount
+
+    rate = config.get("EXCHANGE_RATE")
+    converted = float(amount) * rate
+    return converted
