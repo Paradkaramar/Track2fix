@@ -1,0 +1,19 @@
+# Trace2Fix Protocol for Windsurf / Cascade
+
+When the user asks to investigate an incident or triggers `/trace2fix`:
+1. Read `AGENTS.md` and `incidents/<INCIDENT-ID>.md`.
+2. Do not modify files during investigation.
+3. Isolate evidence across 4 distinct domains:
+   - Logs: `incidents/<INCIDENT-ID>-logs.json`
+   - Code: `app/main.py`, `app/payment.py`
+   - Configuration/Docs: `config/prod.yaml`, `config/dev.yaml`, `docs/`
+   - Test Coverage: `tests/`
+4. Synthesize findings and output the TRACE2FIX ROOT CAUSE REPORT.
+5. Strictly stop at the Human Approval Gate:
+   ```
+   ==================================================
+   STATUS: AWAITING REMEDIATION APPROVAL
+   "Root cause approved. Proceed with remediation."
+   ==================================================
+   ```
+6. After approval, follow TDD remediation and complete the 10-Point Verification Checklist.

@@ -1,0 +1,30 @@
+---
+description: Trace2Fix production incident investigation and safe remediation workflow. Trigger with /trace2fix or when debugging incidents like INC-001.
+globs: *
+alwaysApply: false
+---
+
+# Trace2Fix: Autonomous Incident Investigation & Remediation
+
+When the user asks to investigate an incident (e.g. `/trace2fix INC-001` or "investigate INC-001"):
+
+## Core Execution Rules
+1. **Never repair seeded incidents without explicit human approval.**
+2. **Phase 0:** Read `AGENTS.md` and `incidents/<INCIDENT-ID>.md`. Do NOT read code or tests yet.
+3. **Phase 1 (4-Domain Isolation):** Analyze the problem across 4 isolated domains independently:
+   - **Logs**: `incidents/<INCIDENT-ID>-logs.json` (trace request ID e.g. `req-1842`)
+   - **Code**: `app/main.py` -> `app/payment.py` (call chain analysis)
+   - **Docs & Config**: `docs/*.md` vs `config/dev.yaml` and `config/prod.yaml`
+   - **Tests**: `tests/conftest.py` and `tests/test_*.py`
+4. **Phase 2 & 3:** Triangulate evidence. A root cause is HIGH confidence only with multi-domain agreement. Print the structured ROOT CAUSE REPORT.
+5. **Phase 4 (HUMAN GATE):** HALT. Output:
+   ```
+   ==================================================
+   STATUS: AWAITING REMEDIATION APPROVAL
+   To proceed with remediation, reply with:
+     "Root cause approved. Proceed with remediation."
+   ==================================================
+   ```
+   DO NOT modify any code or configuration until the user approves.
+6. **Phase 5 (Remediation):** TDD sequence (Failing regression test -> minimal surgical fix -> pass test -> run full pytest -> check 10-point verification checklist).
+7. **Phase 6:** Write incident postmortem report in `reports/<INCIDENT-ID>.md`.

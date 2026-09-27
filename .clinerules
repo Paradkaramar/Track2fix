@@ -1,0 +1,16 @@
+# Cline / Roo Code System Rules: Trace2Fix
+
+When the user triggers `/trace2fix` or asks to investigate a production incident (e.g., `INC-001`):
+
+1. Read `AGENTS.md` and `incidents/<INCIDENT-ID>.md`.
+2. Do not modify files during Phase 0 to Phase 3.
+3. Conduct 4-domain epistemic isolation across Logs, Code, Specs/Config, and Tests.
+4. Triangulate findings into a formal ROOT CAUSE REPORT.
+5. Stop unconditionally at the Human Approval Gate:
+   ```
+   ==================================================
+   STATUS: AWAITING REMEDIATION APPROVAL
+   "Root cause approved. Proceed with remediation."
+   ==================================================
+   ```
+6. Upon receiving approval, write a failing regression test first, confirm it fails, apply the minimal fix, run full test suite, verify all 10 checks, and generate `reports/<INCIDENT-ID>.md`.
