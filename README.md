@@ -92,7 +92,7 @@ or
 
 ```bash
 # Start timer
-python benchmark/benchmark.py start --workflow trace2fix --incident INC-001 --phase investigation
+python benchmark/benchmark.py start --workflow trace2fix --incident INC-001 --phase investigation.
 
 # (run the skill)
 
