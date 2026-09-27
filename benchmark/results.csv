@@ -1,0 +1,2 @@
+incident_id,workflow,recorded_at,investigation_time_seconds,resolution_time_seconds,total_time_seconds,manual_steps,root_cause_correct,fix_attempts,regression_test_created,verification_completed,verification_total,verification_percentage
+INC-001,manual,2026-09-27T11:45:14Z,49.4,66.3,115.7,19,yes,1,yes,10,10,100.0
