@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Trace2Fix: Reproduce Incident (INC-001)",
+      "type": "shell",
+      "command": "python scripts/reproduce_incident.py",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Trace2Fix: Run Full Pytest Suite",
+      "type": "shell",
+      "command": "pytest -v",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Trace2Fix: Compare Benchmark Metrics",
+      "type": "shell",
+      "command": "python benchmark/benchmark.py compare --incident INC-001",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
