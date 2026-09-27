@@ -3,6 +3,8 @@
 POST /payments with a non-USD currency under production configuration must
 return HTTP 200 with a clear error — not an uncontrolled HTTP 500 TypeError.
 
+
+
 Before the fix : HTTP 500 (unguarded float * NoneType in app/payment.py)
 After the fix  : HTTP 422 or similar explicit error (defensive guard raises
                  a handled exception when EXCHANGE_RATE is absent from config)
