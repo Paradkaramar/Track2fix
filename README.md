@@ -133,3 +133,4 @@ benchmark/      Investigation timing CLI and results.csv
 reports/        Trace2Fix incident reports (generated after remediation)
 .bob/skills/    Bob skills including trace2fix
 ```
+
